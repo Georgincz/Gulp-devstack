@@ -1,0 +1,29 @@
+$primary-color: #98BC40;
+$secondary-color: #202020;
+
+h1 {
+    color: $primary-color;
+    font-size: 42px;
+}
+
+header {
+    background-color: $secondary-color;
+    column-count: 1;
+}
+
+footer {
+    background-color: $secondary-color;
+}
+
+.grid {
+    display: grid;
+}
+
+.multicol2 {
+    column-count: 2;
+}
+
+.container {
+    display: block;
+    column-count: 1;
+}
