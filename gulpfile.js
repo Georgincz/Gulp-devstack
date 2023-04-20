@@ -12,7 +12,7 @@ const autoprefixer = require('gulp-autoprefixer');
 const purgecss = require('gulp-purgecss');
 
 gulp.task('clean', function () {
-    return gulp.src(['./css/*.css', './js/*.min.js'], {read: false})
+    return gulp.src(['./css/*.css', '!./css/normalize.css', './js/*.min.js'], {read: false})
         .pipe(clean())
 });
 

@@ -25,9 +25,10 @@ Základní devstack s použitím preprocessoru SASS a Gulp task runneru.
 * v souboru `package.json` v "devDependencies" jsou vypsané NPM balíčky, které je potřeba případně nainstalovat
 * po instalaci otestovat nastavení Gulpu příkazem `gulp`
 
-### Gulp - použití
+## Gulp - použití
 
 V souboru Gulpu `gulpfile.js` jsou nastaveny dva módy
-* **Vývojový** - obsahuje jen úkoly pro převedení SASS do CSS a spuštění v prohlížeči, spouští se příkazem `gulp`
-
-* **Produkční** - obsahuje i další úkoly pro minifikaci CSS, JS souborů a obrázků, spouští se příkazem `gulp prod`
+* **Vývojový** - obsahuje jen úkoly pro převedení SASS do CSS a spuštění v prohlížeči
+> spouští se příkazem `gulp`
+* **Produkční** - obsahuje i další úkoly pro minifikaci CSS, JS souborů a obrázků
+> spouští se příkazem `gulp prod`
