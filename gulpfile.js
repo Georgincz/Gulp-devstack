@@ -12,12 +12,12 @@ const autoprefixer = require('gulp-autoprefixer');
 const purgecss = require('gulp-purgecss');
 
 gulp.task('clean', function () {
-    return gulp.src(['./css/*.css', '!./css/normalize.css', './js/*.min.js'], {read: false})
+    return gulp.src(['./css/*.css', './js/*.min.js'], {read: false})
         .pipe(clean())
 });
 
 gulp.task('sass', function() {
-    return gulp.src('./sass/**/*.scss')
+    return gulp.src('./sass/**/styles.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('./css'))
 });
@@ -29,15 +29,27 @@ gulp.task('concat', function() {
 });
 
 gulp.task('purge', function () {
-    return gulp.src('./css/*.css')
+    return gulp.src('./css/styles.css')
     .pipe(purgecss({
         content: ['./**/*.html']
     }))
     .pipe(gulp.dest('./css'))
 });
 
+gulp.task('purgeReject', function () {
+    return gulp.src('./css/styles.css')
+        .pipe(rename({
+            suffix: '-rejected'
+        }))
+        .pipe(purgecss({
+            content: ['./**/*.html'],
+            rejected: true
+        }))
+        .pipe(gulp.dest('./css'))
+});
+
 gulp.task('postCss', function () {
-    return gulp.src('./css/*.css')
+    return gulp.src('./css/styles.css')
     .pipe(purgecss({
         content: ['./**/*.html']
     }))
@@ -50,7 +62,7 @@ gulp.task('postCss', function () {
 gulp.task('uglify', function () {
     return gulp.src('./js/*.js')
           .pipe(uglify())
-          .pipe(rename('script.min.js'))
+          .pipe(rename('scripts.min.js'))
           .pipe(gulp.dest('./js'))
 });
 
@@ -80,11 +92,11 @@ gulp.watch('./js/*.js').on('change', function(path, stats) {
     console.log(`JS File ${path} was changed`);
 });
 
-gulp.watch('./sass/**/*.scss', gulp.series('clean', 'sass', 'concat', 'reload'));
+gulp.watch('./sass/**/*.scss', gulp.series('clean', 'sass', 'reload'));
 gulp.watch('./js/*.js', gulp.series('reload'));
 
 // Vývojový mód
-gulp.task('default', gulp.series('clean', 'sass', 'concat', 'browserSync'));
+gulp.task('default', gulp.series('clean', 'sass', 'browserSync'));
 
 // Produkční mód
 gulp.task('prod', gulp.series('clean', 'sass', 'concat', 'postCss', 'uglify', 'imagesMin', 'browserSync'));
